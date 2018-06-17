@@ -6,6 +6,7 @@ var ready_for_next_attack = true
 const MAX_COMBO_COUNT = 3
 var combo_count = 0
 var hit_objects = []
+
 var attack_current = {}
 var combo = [
 	{
@@ -59,6 +60,13 @@ func _on_animation_finished(anim):
 		_Enity.emit_signal("attack_finished")
 		return IDLE
 
+func _on_body_entered(body):
+	if body.get_rid().get_id() in hit_objects:
+		return
+	if body.has_node("Health"):
+		hit_objects.append(body.get_rid().get_id())
+		body.take_damage(_Enity, attack_current['damage'])
+	
 func _connect():
 	_AnimationPlayer.connect('animation_finished', _Enity, "_on_animation_finished")
 	_Enity.connect("body_entered", _Enity, "_on_body_entered")

@@ -11,6 +11,7 @@ onready var States = {
 	ATTACK: $"States/Attack"
 }
 
+
 func _ready():
 	states.push_front(States[IDLE])
 	states[0].enter()
@@ -51,6 +52,7 @@ func _on_animation_finished(anim):
 	var new_state = states[0]._on_animation_finished(anim)
 	if new_state:
 		go_to_state(new_state)
+
 		
 func set_attack_input_listening():
 	$States/Attack.attack_input_state = 0

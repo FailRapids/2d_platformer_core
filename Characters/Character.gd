@@ -48,8 +48,18 @@ func _physics_process(delta):
 	if new_state:
 		go_to_state(new_state)
 
+func take_damage(attacker_weapon, amount):
+	if self.is_a_parent_of(attacker_weapon):
+		return
+	$'States/Stagger'.knockback_direction = (attacker_weapon.global_position - global_position).normalized()
+	$Health.take_damage(amount)
+
 func _on_health_changed(new_health):
-	pass
+	if new_health == 0:
+		go_to_state(DIE)
+	else:
+		go_to_state(STAGGER)
+
 
 func go_to_state(new_state):
 	match new_state:

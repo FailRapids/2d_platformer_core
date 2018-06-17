@@ -8,9 +8,6 @@
 [ext_resource path="res://Weapons/States/Idle.gd" type="Script" id=6]
 [ext_resource path="res://Weapons/States/Attack.gd" type="Script" id=7]
 
-
-
-
 [sub_resource type="Animation" id=1]
 
 resource_name = "Idle"
@@ -109,7 +106,8 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[node name="Weapon" type="Area2D" index="0"]
+[node name="Weapon" type="Area2D"]
+
 show_behind_parent = true
 rotation = -1.5708
 input_pickable = true
@@ -118,12 +116,15 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 monitorable = false
+collision_layer = 8
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Collision", "Visibility" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+
 root_node = NodePath("..")
 autoplay = "SETUP"
 playback_process_mode = 1
@@ -137,6 +138,7 @@ anims/SETUP = SubResource( 2 )
 blend_times = [  ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
+
 position = Vector2( 13, 0 )
 rotation = 1.57079
 texture = ExtResource( 5 )
@@ -145,6 +147,7 @@ region_rect = Rect2( 144, 0, 16, 32 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="2"]
+
 position = Vector2( 0, 2 )
 build_mode = 0
 polygon = PoolVector2Array( 3, -6, 20, -6, 20, 2, 3, 2 )
@@ -152,8 +155,11 @@ polygon = PoolVector2Array( 3, -6, 20, -6, 20, 2, 3, 2 )
 [node name="States" type="Node" parent="." index="3"]
 
 [node name="Idle" type="Node" parent="States" index="0"]
+
 script = ExtResource( 6 )
 
 [node name="Attack" type="Node" parent="States" index="1"]
+
 script = ExtResource( 7 )
+
 
