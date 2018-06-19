@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var stack = []
+var state_stack = []
 
 enum STATE_IDS {
 				NULL=0, PREVIOUS_STATE=1, 
@@ -35,85 +35,75 @@ var height = 0.0 setget set_height, get_height
 var mass = 0 setget set_mass, get_mass
 
 func _ready():
-	stack.push_front(States[IDLE])
-	stack[0].enter()
+ state_stack.push_front(States[IDLE])
+ state_stack[0].enter()
 
 func _process(delta):
-	pass
-
-func _physics_process(delta):
-	if not stack[0].has_method('update'):
+	if not state_stack[0].has_method("update"):
 		return
-	var new_state = stack[0].update(delta)
+	var new_state = state_stack[0].update(delta)
 	if new_state:
 		go_to_state(new_state)
 
-func take_damage(attacker_weapon, amount):
-	if self.is_a_parent_of(attacker_weapon):
+func _physics_process(delta):
+	if not state_stack[0].has_method('physics_update'):
 		return
-	$'States/Stagger'.knockback_direction = (attacker_weapon.global_position - global_position).normalized()
-	$Health.take_damage(amount)
-
-func _on_health_changed(new_health):
-	if new_health == 0:
-		go_to_state(DIE)
-	else:
-		go_to_state(STAGGER)
-
+	var new_state = state_stack[0].physics_update(delta)
+	if new_state:
+		go_to_state(new_state)
 
 func go_to_state(new_state):
 	match new_state:
 		PREVIOUS_STATE:
-			stack.pop_front().exit()
+		 state_stack.pop_front().exit()
 		ATTACK:
-			stack.push_front(States[new_state])
+		 state_stack.push_front(States[new_state])
 		JUMP:
-			stack.push_front(States[new_state])
+		 state_stack.push_front(States[new_state])
+		STAGGER:
+		 state_stack.push_front(States[new_state])
 		_:
-			for i in range(len(stack)):
-				stack[i].exit()
-			stack.push_front(States[new_state])
+			for i in range(len(state_stack)):
+			 state_stack[i].exit()
+		 state_stack.push_front(States[new_state])
 	
-	stack[0].enter()
+ state_stack[0].enter()
 
 func _on_animation_finished( Anim ):
-	if not stack[0].has_method('_on_animation_finished'):
+	if not state_stack[0].has_method('_on_animation_finished'):
 		return
-	var new_state = stack[0]._on_animation_finished(Anim)
+	var new_state = state_stack[0]._on_animation_finished(Anim)
 	if new_state:
 		go_to_state(new_state)
 		
 func _on_tween_finished(object,key):
-	if not stack[0].has_method('_on_tween_finished'):
+	if not state_stack[0].has_method('_on_tween_finished'):
 		return
-	var new_state = stack[0]._on_tween_finished(object,key)
+	var new_state = state_stack[0]._on_tween_finished(object,key)
+	if new_state:
+		go_to_state(new_state)
+
+func _on_health_changed(new_health):
+	if  not state_stack[0].has_method("_on_health_changed"):
+		return
+	var new_state = state_stack.front()._on_health_changed(new_health)
 	if new_state:
 		go_to_state(new_state)
 
 func _on_attack_finished():
-	if not stack[0].has_method('_on_attack_finished'):
+	if not state_stack[0].has_method('_on_attack_finished'):
 		return
-	var new_state = stack[0]._on_attack_finished()
+	var new_state = state_stack[0]._on_attack_finished()
 	if new_state:
 		go_to_state(new_state)
 		
 func get_look_direction():
-	var last = look_direction
-	look_direction = Vector2()
-	
-	if look_direction != Vector2():
-		return look_direction
-	else:
-		return last
+	pass
 	
 func get_move_direction():
-	var last = move_direction
-	move_direction = Vector2()
-	if move_direction != Vector2():
-		return move_direction
-	else:
-		return last
+	pass
 
+#Just some surface area to help track errors
 func get_speed():
 	return speed
 
@@ -133,7 +123,6 @@ func get_velocity():
 	return velocity 
 
 func set_velocity(value):
-	assert typeof(value) == TYPE_VECTOR2
 	velocity = value
 
 func get_air_velocity():
@@ -149,6 +138,7 @@ func get_height():
 
 func set_height(value):
 	assert value >= 0
+	$"BodyPivot/Body".position.y = -value
 	height = value
 
 func get_mass():

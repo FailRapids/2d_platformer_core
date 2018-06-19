@@ -1,0 +1,48 @@
+// {type:class}
+// {direction:leftToRight}
+// {generate:true}
+
+[Weapons]
+    [Weapons]^[Fist]
+    
+    [Weapons]^[Swords]
+        [Swords]^[Wooden_Sword]
+        [Swords]^[Rusty_Sword]
+        [Swords]^[Metal_Sword]
+        [Swords]^[Master_Sword]
+
+
+[Spells]
+    [Spells]^[Fire]
+        [Fire]^[Fire_Ball]
+        [Fire]^[Flame_Breath]
+        [Fire]^[Fire_Bomb]
+
+    [Spells]^[Ice]
+        [Ice]^[Ice_Spike]
+        [Ice]^[Ice_Breath]
+        [Ice]^[Ice_Bomb]
+
+[Character]
+    [Character]^[Player]
+        [Player]-.->[Weapons]
+        [Player]-.->[Spells]
+
+    [Character]^[Monsters]
+        [Monsters]^[Goblin]
+
+    [Character]^[Npcs]
+        [Npcs]^[Red_Mage]
+            [Red_Mage]-.->[Fire]
+
+        [Npcs]^[Blue_Mage]
+            [Blue_Mage]-.->[Ice]
+
+        [Npcs]^[Old_Man]
+            [Old_Man]-.->[Fist]
+
+        [Npcs]^[Knight]
+            [Knight]-.->[Swords]
+
+
+

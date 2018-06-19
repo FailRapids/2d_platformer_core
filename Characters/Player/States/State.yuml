@@ -1,0 +1,22 @@
+// {type:state}
+// {directiom:leftToRight}
+
+(start)->(Idle)
+
+(Idle)->(Move)
+    (Move)->(Jump)
+    (Move)->(Attack)
+
+(Idle)->(Jump)
+    (Jump)->(Previous)
+
+(Idle)->(Attack)
+    (Attack)->(Idle)
+
+(on_hit)->(Stagger)
+    (Stagger)[Hp != 0]->(Idle)
+    (Stagger)->(Die)->(end)
+
+
+
+

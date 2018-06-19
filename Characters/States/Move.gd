@@ -11,26 +11,26 @@ func enter():
 	_AnimationPlayer.play("Walk")
 	
 func update(delta):
-	return move(delta,_Enity.look_direction)
+	return move(delta,_Character.look_direction)
 	
 func exit():
-	self.speed = 0
-	self.mass = 0
-	self.velocity = Vector2()
+	_Character.speed = 0
+	_Character.mass = 0
+	_Character.velocity = Vector2()
 	_AnimationPlayer.stop()
 	
 func move(delta,direction):
-	if _Enity.move_direction != Vector2():
-		self.speed = clamp(self.speed + (ACCELRATION * delta), self.speed, MAX_SPEED)
-		self.mass =  clamp(self.mass + (ACCELRATION * delta), self.mass, MASS)
+	if _Character.move_direction != Vector2():
+		_Character.speed = clamp(_Character.speed + (ACCELRATION * delta), _Character.speed, MAX_SPEED)
+		_Character.mass =  clamp(_Character.mass + (ACCELRATION * delta), _Character.mass, MASS)
 	else:
-		self.speed = clamp(self.speed - (DECCELERATION * delta), 0, self.speed)
-		self.mass = clamp(self.mass - (DECCELERATION * delta), 1, MASS)
+		_Character.speed = clamp(_Character.speed - (DECCELERATION * delta), 0, _Character.speed)
+		_Character.mass = clamp(_Character.mass - (DECCELERATION * delta), 1, MASS)
 		
-	var steered_velocity = (direction * self.speed) - velocity
+	var steered_velocity = (direction * _Character.speed) - _Character.velocity
 	
-	self.velocity += (steered_velocity / self.mass) * STRENGTH
-	_Enity.move_and_slide(self.velocity)
+	_Character.velocity += (steered_velocity / _Character.mass) * STRENGTH
+	_Character.move_and_slide(_Character.velocity)
 	
-	if _Enity.move_direction == Vector2() and speed <= 5:
+	if _Character.move_direction == Vector2() and _Character.speed <= 5:
 		return IDLE

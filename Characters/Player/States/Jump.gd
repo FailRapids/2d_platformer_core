@@ -25,19 +25,19 @@ func exit():
 	
 func jump(delta,direction):
 	if _Player.move_direction != Vector2():
-		self.air_speed = clamp(self.air_speed + (ACCELRATION * delta),15,MAX_SPEED)
-		self.mass = clamp(self.mass + (ACCELRATION * delta),10,MASS)
+		_Player.air_speed = clamp(_Player.air_speed + (ACCELRATION * delta),15,MAX_SPEED)
+		_Player.mass = clamp(_Player.mass + (ACCELRATION * delta),10,MASS)
 	else:
-		self.air_speed =clamp(self.air_speed - (DECCELERATION * delta), 0,self.air_speed)
-		self.mass = clamp(self.mass - (DECCELERATION * delta), 10, self.mass)
+		_Player.air_speed =clamp(_Player.air_speed - (DECCELERATION * delta), 0,_Player.air_speed)
+		_Player.mass = clamp(_Player.mass - (DECCELERATION * delta), 10, _Player.mass)
 	
-	var steered_velocity = (direction * self.air_speed) - self.air_velocity
-	self.air_velocity += (steered_velocity / self.mass) * STRENGTH
+	var steered_velocity = (direction * _Player.air_speed) - _Player.air_velocity
+	_Player.air_velocity += (steered_velocity / _Player.mass) * STRENGTH
 	
-	_Player.move_and_slide(self.air_velocity)
+	_Player.move_and_slide(_Player.air_velocity)
 	
 func _animate_jump_height(progress):
-	self.height = (pow(sin(progress * PI), 0.5) * MAX_JUMP_HEIGHT)
+	_Player.height = (pow(sin(progress * PI), 0.5) * MAX_JUMP_HEIGHT)
 	
 func _on_tween_finished(object,key):
 	if key == ":_animate_jump_height":

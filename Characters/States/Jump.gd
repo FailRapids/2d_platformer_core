@@ -12,19 +12,19 @@ export var MAX_JUMP_HEIGHT = 8
 
 func enter():
 	_Collision.disabled = true
-	_Tween.connect('tween_completed', _Enity,'_on_tween_finished')
+	_Tween.connect('tween_completed', _Character,'_on_tween_finished')
 	_Tween.interpolate_method(self, '_animate_jump_height', 0, 1, JUMP_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	_Tween.start()
 
 func update(delta):
-	jump(delta,_Enity.look_direction)
+	jump(delta,_Character.look_direction)
 	
 func exit():
 	_Collision.disabled = false
-	_Tween.disconnect('tween_completed',_Enity,'_on_tween_finished')
+	_Tween.disconnect('tween_completed',_Character,'_on_tween_finished')
 	
 func jump(delta,direction):
-	if _Enity.move_direction != Vector2():
+	if _Character.move_direction != Vector2():
 		self.air_speed = clamp(self.air_speed + (ACCELRATION * delta),15,MAX_SPEED)
 		self.mass = clamp(self.mass + (ACCELRATION * delta),1,MASS)
 	else:
@@ -33,7 +33,7 @@ func jump(delta,direction):
 	
 	var steered_velocity = (direction * self.air_speed) - self.air_velocity
 	self.air_velocity += (steered_velocity / self.mass) * STRENGTH
-	_Enity.move_and_slide(self.air_velocity)
+	_Character.move_and_slide(self.air_velocity)
 	
 func _animate_jump_height(progress):
 	self.height = (pow(sin(progress * PI), 0.5) * MAX_JUMP_HEIGHT)

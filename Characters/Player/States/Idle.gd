@@ -5,7 +5,7 @@ func enter():
 	_AnimationPlayer.play("Idle")
 	
 func update(delta):
-	if _Enity.move_direction != Vector2():
+	if _Player.move_direction != Vector2():
 		return MOVE
 
 func exit():
@@ -17,5 +17,4 @@ func handle_input(event):
 		return JUMP
 	if Input.is_action_just_pressed("Player_Attack"):
 		return ATTACK
-	if Input.is_action_pressed("Debug_Stagger"):
-		return STAGGER
+	
