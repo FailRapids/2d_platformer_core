@@ -47,7 +47,7 @@ func attack():
 func handle_input(event):
 	if attack_input_state != LISTENING:
 		return
-	if Input.is_action_just_pressed('Player_Attack'):
+	if Input.is_action_just_pressed('Attack'):
 		attack_input_state = REGISTERED
 
 func _on_animation_finished(anim):

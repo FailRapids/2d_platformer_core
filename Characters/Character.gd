@@ -55,19 +55,17 @@ func _physics_process(delta):
 func go_to_state(new_state):
 	match new_state:
 		PREVIOUS_STATE:
-		 state_stack.pop_front().exit()
+			state_stack.pop_front().exit()
 		ATTACK:
-		 state_stack.push_front(States[new_state])
+			state_stack.push_front(States[new_state])
 		JUMP:
-		 state_stack.push_front(States[new_state])
-		STAGGER:
-		 state_stack.push_front(States[new_state])
+			state_stack.push_front(States[new_state])
 		_:
 			for i in range(len(state_stack)):
-			 state_stack[i].exit()
-		 state_stack.push_front(States[new_state])
-	
- state_stack[0].enter()
+				state_stack.pop_front().exit()
+			state_stack.push_front(States[new_state])
+	emit_signal("state_changed",state_stack)
+	state_stack[0].enter()
 
 func _on_animation_finished( Anim ):
 	if not state_stack[0].has_method('_on_animation_finished'):
@@ -147,3 +145,6 @@ func get_mass():
 func set_mass(value):
 	assert value >= 0
 	mass = value	
+
+func _on_tween_completed(object, key):
+	pass # replace with function body

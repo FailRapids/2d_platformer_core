@@ -7,6 +7,7 @@ var health = 0
 export(int) var max_health = 9
 
 func _ready():
+	connect("health_changed", $"..","_on_health_changed")
 	health = max_health
 
 func damage(amount):

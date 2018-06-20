@@ -1,7 +1,7 @@
 extends 'res://Characters/Player/States/_State.gd'
 
 export var MAX_SPEED = 60
-export var RUN_SCALE = 2.5
+export var RUN_SCALE = 2
 export var ACCELRATION = 35
 export var DECCELERATION = 60
 

@@ -12,7 +12,6 @@ export var MAX_JUMP_HEIGHT = 8
 
 func enter():
 	_Collision.disabled = true
-	_Tween.connect('tween_completed', _Character,'_on_tween_finished')
 	_Tween.interpolate_method(self, '_animate_jump_height', 0, 1, JUMP_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	_Tween.start()
 
@@ -21,7 +20,6 @@ func update(delta):
 	
 func exit():
 	_Collision.disabled = false
-	_Tween.disconnect('tween_completed',_Character,'_on_tween_finished')
 	
 func jump(delta,direction):
 	if _Character.move_direction != Vector2():

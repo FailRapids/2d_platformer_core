@@ -9,15 +9,20 @@ export(float) var MASS = 15.0
 
 func enter():
 	_AnimationPlayer.play("Walk")
-	
-func update(delta):
-	return move(delta,_Character.look_direction)
-	
+
 func exit():
 	_Character.speed = 0
 	_Character.mass = 0
 	_Character.velocity = Vector2()
-	_AnimationPlayer.stop()
+	_AnimationPlayer.stop()	
+
+func update():
+	pass
+
+func physics_update(delta):
+	return move(delta,_Character.look_direction)
+	
+
 	
 func move(delta,direction):
 	if _Character.move_direction != Vector2():

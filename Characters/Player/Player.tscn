@@ -9,9 +9,9 @@
 [ext_resource path="res://Characters/Player/States/Move.gd" type="Script" id=7]
 [ext_resource path="res://Characters/Player/States/Jump.gd" type="Script" id=8]
 [ext_resource path="res://Characters/Player/States/Attack.gd" type="Script" id=9]
-[ext_resource path="res://Characters/Weapons/Weapon.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/Weapons/Swords/Rusty_Sword.tscn" type="PackedScene" id=10]
 
-[node name="Player" index="0" instance=ExtResource( 1 )]
+[node name="Player" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 
@@ -26,12 +26,10 @@ autoplay = ""
 
 [node name="Body" parent="BodyPivot" index="0"]
 
-offset = Vector2( 0, -8 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="WeaponPivot" type="Position2D" parent="." index="5"]
 
-editor/display_folded = true
 position = Vector2( 0.358475, -17.5658 )
 script = ExtResource( 4 )
 
@@ -84,9 +82,9 @@ script = ExtResource( 7 )
 _sections_unfolded = [ "script" ]
 STRENGTH = 1
 MAX_SPEED = 80
-RUN_SCALE = 2.5
+RUN_SCALE = 2
 ACCELRATION = 80
-DECCELERATION = 80
+DECCELERATION = 100
 
 [node name="Jump" parent="States" index="2"]
 

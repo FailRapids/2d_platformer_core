@@ -1,0 +1,8 @@
+// {type:state}
+// {direction:leftToRight}
+
+(start)->(Idle)-> (Attack)
+(Attack)->(exit)
+
+
+

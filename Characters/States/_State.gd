@@ -10,26 +10,19 @@ enum STATE_IDS {
 				}
 
 onready var _Character = $"../.."
+onready var _BodyPivot = $"../../BodyPivot"
+onready var _Collision = $"../../Collision"
+onready var _AnimationPlayer = $"../../AnimationPlayer"
+onready var _Tween = $"../../Tween"
 
-onready var _BodyPivot = $"../..".get_node("BodyPivot")
-onready var _WeaponPivot = $"../..".get_node("WeaponPivot")
-onready var _CameraPivot = $"../..".get_node("CameraPivot")
-
-onready var _Collision = $"../..".get_node("Collision")
-
-onready var _AnimationPlayer = $"../..".get_node("AnimationPlayer")
-onready var _Tween = $"../..".get_node("Tween")
-onready var _WeaponSpawn =$"../..".get_node("WeaponPivot/WeaponSpawn")
-
-onready var _Health = $"../../Health"
 
 export(int,1,10) var STRENGTH = 5
 
 func enter():
-	pass
+	_connect()
 
 func exit():
-	pass
+	_disconnect()
 	
 func update(delta):
 	pass
@@ -39,7 +32,12 @@ func physics_update(delta):
 
 func handle_input(event):
 	pass
-		
+
+func _connect():
+	pass
+func _disconnect():
+	pass
+
 func _on_animation_finished(name):
 	pass
 
