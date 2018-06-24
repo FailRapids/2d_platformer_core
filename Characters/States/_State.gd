@@ -4,9 +4,10 @@ signal status_changed(_dict)
 
 enum STATE_IDS {
 				NULL=0, PREVIOUS_STATE=1,
-				IDLE=2, MOVE=3, 
-				JUMP=4, ATTACK=5, 
-				DIE=6, STAGGER=7
+				IDLE, MOVE, 
+				RUN,
+				JUMP, ATTACK, 
+				DIE, STAGGER
 				}
 
 onready var _Character = $"../.."
@@ -33,10 +34,6 @@ func physics_update(delta):
 func handle_input(event):
 	pass
 
-func _connect():
-	pass
-func _disconnect():
-	pass
 
 func _on_animation_finished(name):
 	pass

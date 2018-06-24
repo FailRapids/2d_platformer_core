@@ -7,10 +7,7 @@ path="res://.import/scene.svg-8a4148e1756ddadd65f22f6f13523707.stex"
 [deps]
 
 source_file="res://Characters/scene.svg"
-source_md5="4662205f1397fe06652b39c21b1bf3bc"
-
 dest_files=[ "res://.import/scene.svg-8a4148e1756ddadd65f22f6f13523707.stex" ]
-dest_md5="8d19fac1d7fbc22cc1be62d7eb1f7f9a"
 
 [params]
 

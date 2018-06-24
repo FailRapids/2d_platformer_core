@@ -2,14 +2,25 @@ extends "res://Characters/Player/States/_State.gd"
 
 export(PackedScene) var weapon_path = "res://Weapons/Weapon.tscn"
 
+export var MAX_SPEED = 60
+export var ACCELRATION = 35
+export var DECCELERATION = 60
+
 var weapon = null
 
 func enter():
-	_Player.set_physics_process(false)
+	_Player.set_process_input(false)
 	_spawn_weapon()
-	
+
 func exit():
-	_Player.set_physics_process(true)
+	_Player.set_process_input(true)
+	
+
+func physics_update(delta):
+	$'../Move'.move(delta,_Player.move_direction)
+
+
+	
 
 func _spawn_weapon():
 	var weapon_instance = weapon_path.instance()

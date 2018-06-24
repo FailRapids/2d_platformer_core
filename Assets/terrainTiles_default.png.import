@@ -7,10 +7,7 @@ path="res://.import/terrainTiles_default.png-89913ac56bb71e78c493e8ac723d3e33.st
 [deps]
 
 source_file="res://Assets/terrainTiles_default.png"
-source_md5="c2c8cc73c657585c3eb7f5ccbc373c1f"
-
 dest_files=[ "res://.import/terrainTiles_default.png-89913ac56bb71e78c493e8ac723d3e33.stex" ]
-dest_md5="7030a0ffcdf3f65f1e7c415f1f4332d7"
 
 [params]
 

@@ -4,9 +4,12 @@ extends 'res://Characters/States/_State.gd'
 func enter():
 	_AnimationPlayer.play('Idle')
 
+
 func update(delta):
 	pass
 
+func physics_update(delta):
+	pass
 
 func exit():
 	_AnimationPlayer.stop()

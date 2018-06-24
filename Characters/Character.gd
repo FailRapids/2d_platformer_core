@@ -4,9 +4,10 @@ var state_stack = []
 
 enum STATE_IDS {
 				NULL=0, PREVIOUS_STATE=1, 
-				IDLE=2, MOVE=3, 
-				JUMP=4, ATTACK=5,
-				DIE=6, STAGGER=7,
+				IDLE, MOVE,
+				RUN, 
+				JUMP, ATTACK,
+				DIE, STAGGER,
 			}
 
 signal state_changed
@@ -15,11 +16,13 @@ signal direction_changed
 onready var States = {
 	IDLE: $'States/Idle',
 	MOVE: $'States/Move',
+	RUN: $'States/Run',
 	JUMP: $'States/Jump',
 	ATTACK: $'States/Attack',
 	STAGGER: $'States/Stagger',
 	DIE: $'States/Die'
 }
+
 
 var look_direction = Vector2() setget ,get_look_direction
 var move_direction = Vector2() setget ,get_move_direction
@@ -32,7 +35,6 @@ var air_speed = 0 setget set_air_speed, get_air_speed
 
 var height = 0.0 setget set_height, get_height
 
-var mass = 0 setget set_mass, get_mass
 
 func _ready():
  state_stack.push_front(States[IDLE])
@@ -47,7 +49,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if not state_stack[0].has_method('physics_update'):
-		return
+		return 
 	var new_state = state_stack[0].physics_update(delta)
 	if new_state:
 		go_to_state(new_state)
@@ -59,6 +61,8 @@ func go_to_state(new_state):
 		ATTACK:
 			state_stack.push_front(States[new_state])
 		JUMP:
+			state_stack.push_front(States[new_state])
+		RUN:
 			state_stack.push_front(States[new_state])
 		_:
 			for i in range(len(state_stack)):
@@ -88,13 +92,29 @@ func _on_health_changed(new_health):
 	if new_state:
 		go_to_state(new_state)
 
+func _on_timer_timeout():
+	if not state_stack[0].has_method("_on_timer_timeout"):
+		return
+	var new_state = state_stack.front()._on_timer_timeout()
+	if new_state:
+		go_to_state(new_state)
+
 func _on_attack_finished():
 	if not state_stack[0].has_method('_on_attack_finished'):
 		return
 	var new_state = state_stack[0]._on_attack_finished()
 	if new_state:
 		go_to_state(new_state)
-		
+
+func move( delta, direction, MAX_SPEED, ACCELRATION, DECCELRATION):
+    if direction != Vector2():
+    	self.speed = clamp(self.speed + (ACCELRATION * delta), 0, MAX_SPEED)
+    else:
+        self.speed = clamp(self.speed - (DECCELRATION * delta), 0, MAX_SPEED)
+    var steered_velocity = (direction * self.speed) - self.velocity 
+    self.velocity += steered_velocity 
+    return self.move_and_slide(self.velocity)
+
 func get_look_direction():
 	pass
 	
@@ -139,12 +159,6 @@ func set_height(value):
 	$"BodyPivot/Body".position.y = -value
 	height = value
 
-func get_mass():
-	return mass
-
-func set_mass(value):
-	assert value >= 0
-	mass = value	
 
 func _on_tween_completed(object, key):
 	pass # replace with function body

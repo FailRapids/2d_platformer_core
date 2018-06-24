@@ -1,40 +1,23 @@
 extends "res://Characters/Player/States/_State.gd"
 
-export var MAX_SPEED = 60
-export var ACCELRATION = 35
-export var DECCELERATION = 60
-export var MASS = 15.0
-
 export var JUMP_DURATION = 0.50
 export var MAX_JUMP_HEIGHT = 8
 
 
 
 func enter():
-	_Collision.disabled = true
 	_Tween.connect('tween_completed', _Player, "_on_tween_finished")
 	_Tween.interpolate_method(self, "_animate_jump_height", 0, 1, JUMP_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	_Tween.start()
 
-func update(delta):
-	jump(delta,_Player.look_direction)
+func physics_update(delta):
+	$'../Move'.move(delta,_Player.move_direction)
+	
 	
 func exit():
-	_Collision.disabled = false
 	_Tween.disconnect('tween_completed', _Player,'_on_tween_finished')
 	
-func jump(delta,direction):
-	if _Player.move_direction != Vector2():
-		_Player.air_speed = clamp(_Player.air_speed + (ACCELRATION * delta),15,MAX_SPEED)
-		_Player.mass = clamp(_Player.mass + (ACCELRATION * delta),10,MASS)
-	else:
-		_Player.air_speed =clamp(_Player.air_speed - (DECCELERATION * delta), 0,_Player.air_speed)
-		_Player.mass = clamp(_Player.mass - (DECCELERATION * delta), 10, _Player.mass)
-	
-	var steered_velocity = (direction * _Player.air_speed) - _Player.air_velocity
-	_Player.air_velocity += (steered_velocity / _Player.mass) * STRENGTH
-	
-	_Player.move_and_slide(_Player.air_velocity)
+
 	
 func _animate_jump_height(progress):
 	_Player.height = (pow(sin(progress * PI), 0.5) * MAX_JUMP_HEIGHT)

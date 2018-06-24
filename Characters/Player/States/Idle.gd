@@ -13,8 +13,8 @@ func exit():
 	
 
 func handle_input(event):
-	if Input.is_action_just_pressed("Player_Jump"):
+	if Input.is_action_just_pressed("Jump"):
 		return JUMP
-	if Input.is_action_just_pressed("Player_Attack"):
+	if Input.is_action_just_pressed("Attack"):
 		return ATTACK
 	

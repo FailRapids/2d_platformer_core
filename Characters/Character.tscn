@@ -164,17 +164,18 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[node name="Character" type="KinematicBody2D"]
-
+[node name="Character" type="KinematicBody2D" index="0"]
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
+MAX_SPEED = 200
+ACCELRATION = 80
+DECCELRATION = 80
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
-
 root_node = NodePath("..")
 autoplay = "SETUP"
 playback_process_mode = 1
@@ -188,7 +189,6 @@ anims/Walk = SubResource( 3 )
 blend_times = [  ]
 
 [node name="Tween" type="Tween" parent="." index="1"]
-
 repeat = false
 playback_process_mode = 1
 playback_speed = 1.0
@@ -197,18 +197,15 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="2"]
-
 build_mode = 0
 polygon = PoolVector2Array( 16, 0, -16, 0, -16, -16, 16, -16 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="BodyPivot" type="Position2D" parent="." index="3"]
-
 scale = Vector2( 3, 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="BodyPivot" index="0"]
-
 texture = ExtResource( 4 )
 offset = Vector2( 0, -8 )
 region_enabled = true
@@ -216,11 +213,11 @@ region_rect = Rect2( 64, 128, 16, 16 )
 _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
 [node name="Shadow" type="Polygon2D" parent="BodyPivot" index="1"]
-
 modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 polygon = PoolVector2Array( -8.02128, 0.983336, 8.12849, 0.917687, 6.35595, -1.70829, -6.64264, -1.70829 )
 uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
 color = Color( 0, 0, 0, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
@@ -229,19 +226,19 @@ texture = null
 texture_offset = Vector2( 0, 0 )
 texture_scale = Vector2( 1, 1 )
 texture_rotation_degrees = 0.0
+skeleton = NodePath("")
 invert_enable = false
 invert_border = 100.0
+bones = [  ]
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="States" type="Node" parent="." index="4"]
 
 [node name="Idle" type="Node" parent="States" index="0"]
-
 script = ExtResource( 5 )
 STRENGTH = 5
 
 [node name="Move" type="Node" parent="States" index="1"]
-
 script = ExtResource( 6 )
 STRENGTH = 5
 MAX_SPEED = 60
@@ -250,7 +247,6 @@ DECCELERATION = 60
 MASS = 15.0
 
 [node name="Jump" type="Node" parent="States" index="2"]
-
 script = ExtResource( 7 )
 STRENGTH = 5
 MAX_SPEED = 60
@@ -261,24 +257,26 @@ JUMP_DURATION = 0.5
 MAX_JUMP_HEIGHT = 8
 
 [node name="Attack" type="Node" parent="States" index="3"]
-
 script = ExtResource( 8 )
 STRENGTH = 5
 
 [node name="Stagger" type="Node" parent="States" index="4"]
-
 script = ExtResource( 9 )
 STRENGTH = 5
 stagger_knockback = 20
 STAGGER_DURATION = 0.5
 
 [node name="Die" type="Node" parent="States" index="5"]
-
 script = ExtResource( 10 )
 STRENGTH = 5
 
+[node name="Run" type="Node" parent="States" index="6"]
+
+[node name="RunTimer" type="Timer" parent="States/Run" index="0"]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
-
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
-
-

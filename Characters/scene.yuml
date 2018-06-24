@@ -23,7 +23,7 @@
         [Ice]^[Ice_Breath]
         [Ice]^[Ice_Bomb]
 
-[Character]
+[Character|speed;velocity;height;MAX_SPEED;ACCELERTION;DECCELARTION|move()]
     [Character]^[Player]
         [Player]-.->[Weapons]
         [Player]-.->[Spells]

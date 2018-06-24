@@ -7,10 +7,7 @@ path="res://.import/Enitys.png-f7dd9495afc6e0d6d46924a2a92edccb.stex"
 [deps]
 
 source_file="res://Assets/Enitys.png"
-source_md5="ecf45c8f046cac83fa351cf572f054a0"
-
 dest_files=[ "res://.import/Enitys.png-f7dd9495afc6e0d6d46924a2a92edccb.stex" ]
-dest_md5="b37018a972532d5c51d92ffca10e999c"
 
 [params]
 
