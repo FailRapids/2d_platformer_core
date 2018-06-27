@@ -1,6 +1,6 @@
 extends "res://Characters/States/_State.gd"
 
-func enter():
+func enter(prev_state):
     _Character.set_process_input(false)
     _Character.set_physics_process(false)
     _Collision.disabled = true

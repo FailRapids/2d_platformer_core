@@ -1,6 +1,6 @@
 extends "res://Characters/States/_State.gd"
 
-func enter():
+func enter(prev_state):
 	pass
 
 func exit():

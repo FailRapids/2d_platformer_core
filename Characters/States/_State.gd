@@ -19,11 +19,11 @@ onready var _Tween = $"../../Tween"
 
 export(int,1,10) var STRENGTH = 5
 
-func enter():
-	_connect()
+func enter(prev_state):
+	pass
 
 func exit():
-	_disconnect()
+	pass
 	
 func update(delta):
 	pass

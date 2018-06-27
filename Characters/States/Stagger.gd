@@ -5,7 +5,7 @@ var knockback_direction = Vector2(-1,0)
 export(float) var stagger_knockback = 20
 export(float,0,1) var STAGGER_DURATION = 0.5
 
-func enter():
+func enter(prev_state):
 	_Character.set_process_input(false)
 	_Character.set_physics_process(false)
 	_Collision.disabled = true

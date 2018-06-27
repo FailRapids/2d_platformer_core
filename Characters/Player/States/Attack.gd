@@ -8,7 +8,7 @@ export var DECCELERATION = 60
 
 var weapon = null
 
-func enter():
+func enter(prev_state):
 	_Player.set_process_input(false)
 	_spawn_weapon()
 

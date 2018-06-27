@@ -4,7 +4,7 @@ export(int) var MAX_SPEED = 200
 export(int) var ACCELRATION =80
 export(int) var DECCELRATION = 80
 
-func enter():
+func enter(prev_state):
 	_AnimationPlayer.play("Walk")
 
 

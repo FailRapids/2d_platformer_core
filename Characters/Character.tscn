@@ -39,7 +39,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 3.1, 4, 4.3, 4.5 ),
 "transitions": PoolRealArray( 0.25, 1, 1, 4 ),
 "update": 0,
-"values": [ 0.0, -15.0, 15.0, 0.0 ]
+"values": [ 0.0, -8.0, 8.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -171,9 +171,6 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
-MAX_SPEED = 200
-ACCELRATION = 80
-DECCELRATION = 80
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 root_node = NodePath("..")
@@ -206,6 +203,7 @@ scale = Vector2( 3, 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="BodyPivot" index="0"]
+position = Vector2( 0, 0.2 )
 texture = ExtResource( 4 )
 offset = Vector2( 0, -8 )
 region_enabled = true
@@ -213,7 +211,6 @@ region_rect = Rect2( 64, 128, 16, 16 )
 _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
 [node name="Shadow" type="Polygon2D" parent="BodyPivot" index="1"]
-modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 polygon = PoolVector2Array( -8.02128, 0.983336, 8.12849, 0.917687, 6.35595, -1.70829, -6.64264, -1.70829 )
 uv = PoolVector2Array(  )
@@ -243,8 +240,7 @@ script = ExtResource( 6 )
 STRENGTH = 5
 MAX_SPEED = 60
 ACCELRATION = 35
-DECCELERATION = 60
-MASS = 15.0
+DECCELRATION = 80
 
 [node name="Jump" type="Node" parent="States" index="2"]
 script = ExtResource( 7 )

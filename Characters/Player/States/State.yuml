@@ -2,13 +2,15 @@
 // {directiom:leftToRight}
 
 (start)->(Idle)
-
+(Move)->(Idle)
 (Idle)->(Move)
     (Move)->(Jump)
     (Move)->(Attack)
+    (Move)->(Run)->(Move)
 
 (Idle)->(Jump)
-    (Jump)->(Previous)
+    (Jump)->(Move)
+
 
 (Idle)->(Attack)
     (Attack)->(Idle)

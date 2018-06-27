@@ -10,7 +10,7 @@ export var animation_speed = 1.5
 
 var prev_playback_speed = 0
 
-func enter():
+func enter(prev_state):
     prev_playback_speed = _AnimationPlayer.playback_speed
     _AnimationPlayer.playback_speed = animation_speed
     $RunTimer.wait_time = max_run_time

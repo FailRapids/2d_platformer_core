@@ -1,7 +1,7 @@
 extends "res://Characters/Player/States/_State.gd"
 
 
-func enter():
+func enter(prev_state):
 	_AnimationPlayer.play("Idle")
 	
 func update(delta):

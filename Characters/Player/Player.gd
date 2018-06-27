@@ -50,7 +50,10 @@ func get_move_direction():
 	move_direction = Vector2()
 
 	if Input.is_action_pressed(INPUT_MAP["Up"]):
-		move_direction.y = -1
+		if Input.get_connected_joypads().front():
+			move_direction.y = get_joy_axis(Input.get_connected_joypads().front(),JOY_AXIS_1)
+		else:
+			move_direction.y = -1
 	elif Input.is_action_pressed(INPUT_MAP["Down"]):
 		move_direction.y = 1
 	

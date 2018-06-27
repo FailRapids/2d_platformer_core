@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+#TODO seperate state machice 
 var state_stack = []
 
 enum STATE_IDS {
@@ -38,7 +38,7 @@ var height = 0.0 setget set_height, get_height
 
 func _ready():
  state_stack.push_front(States[IDLE])
- state_stack[0].enter()
+ state_stack[0].enter(state_stack.front())
 
 func _process(delta):
 	if not state_stack[0].has_method("update"):
@@ -55,12 +55,14 @@ func _physics_process(delta):
 		go_to_state(new_state)
 
 func go_to_state(new_state):
+	var prev_state = state_stack.front()
 	match new_state:
 		PREVIOUS_STATE:
 			state_stack.pop_front().exit()
 		ATTACK:
 			state_stack.push_front(States[new_state])
 		JUMP:
+			go_to_state(MOVE)
 			state_stack.push_front(States[new_state])
 		RUN:
 			state_stack.push_front(States[new_state])
@@ -69,7 +71,7 @@ func go_to_state(new_state):
 				state_stack.pop_front().exit()
 			state_stack.push_front(States[new_state])
 	emit_signal("state_changed",state_stack)
-	state_stack[0].enter()
+	state_stack[0].enter(prev_state)
 
 func _on_animation_finished( Anim ):
 	if not state_stack[0].has_method('_on_animation_finished'):
