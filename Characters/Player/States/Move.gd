@@ -27,7 +27,7 @@ func handle_input(event):
 		
 func move(delta,direction):
 	_Player.move( delta, direction, MAX_SPEED, ACCELRATION, DECCELRATION)
-	if _Player.move_direction == Vector2() and _Player.speed <= 5:
+	if _Player.move_direction == Vector2() and _Player.speed <= MAX_SPEED/.50:
 		return IDLE 
 	 
 

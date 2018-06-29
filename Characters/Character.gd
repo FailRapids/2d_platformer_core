@@ -109,13 +109,13 @@ func _on_attack_finished():
 		go_to_state(new_state)
 
 func move( delta, direction, MAX_SPEED, ACCELRATION, DECCELRATION):
-    if direction != Vector2():
-    	self.speed = clamp(self.speed + (ACCELRATION * delta), 0, MAX_SPEED)
-    else:
-        self.speed = clamp(self.speed - (DECCELRATION * delta), 0, MAX_SPEED)
-    var steered_velocity = (direction * self.speed) - self.velocity 
-    self.velocity += steered_velocity 
-    return self.move_and_slide(self.velocity)
+	if direction != Vector2():
+		self.speed = clamp(self.speed + (ACCELRATION * delta), 0, MAX_SPEED)
+	else:
+		self.speed = clamp(self.speed - (DECCELRATION * delta), 0, MAX_SPEED)
+	var steered_velocity = (direction * self.speed) - self.velocity 
+	self.velocity += steered_velocity 
+	return self.move_and_slide(self.velocity)
 
 func get_look_direction():
 	pass
@@ -136,7 +136,7 @@ func get_air_speed():
 	return air_speed
 
 func set_air_speed(value):
-	self.speed = value	
+	self.speed = value
 	air_speed = value
 
 func get_velocity():
@@ -162,5 +162,3 @@ func set_height(value):
 	height = value
 
 
-func _on_tween_completed(object, key):
-	pass # replace with function body

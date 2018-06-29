@@ -1,4 +1,5 @@
 extends "res://Characters/Character.gd"
+export(bool) var use_joypad = false
 
 #Not Realy Needed
 var INPUT_MAP = {
@@ -9,7 +10,7 @@ var INPUT_MAP = {
 				}
 
 func _input(event):
-	if not state_stack[0].has_method('handle_input'):
+	if not state_stack[0].has_method('handle_inp and use_joypadut'):
 		return
 	var new_state = state_stack[0].handle_input(event)
 	if new_state:
@@ -50,18 +51,33 @@ func get_move_direction():
 	move_direction = Vector2()
 
 	if Input.is_action_pressed(INPUT_MAP["Up"]):
-		if Input.get_connected_joypads().front():
-			move_direction.y = get_joy_axis(Input.get_connected_joypads().front(),JOY_AXIS_1)
+		if not Input.get_connected_joypads().empty() and use_joypad:
+			#Pranoid mathing 
+			move_direction.y = -abs(Input.get_joy_axis(Input.get_connected_joypads().front(), JOY_AXIS_1))
 		else:
 			move_direction.y = -1
+
 	elif Input.is_action_pressed(INPUT_MAP["Down"]):
-		move_direction.y = 1
+		if not Input.get_connected_joypads().empty() and use_joypad:
+			#Pranoid mathing 
+			move_direction.y = abs(Input.get_joy_axis(Input.get_connected_joypads().front(), JOY_AXIS_1))
+		else:
+			move_direction.y = 1
 	
 	if Input.is_action_pressed(INPUT_MAP["Left"]):
-		move_direction.x = -1
+		if not Input.get_connected_joypads().empty() and use_joypad:
+			#Pranoid mathing 
+			move_direction.x = -abs(Input.get_joy_axis(Input.get_connected_joypads().front(), JOY_AXIS_0))
+		else:
+			move_direction.x = -1
 		$"BodyPivot/Body".flip_h = true
+		
 	elif Input.is_action_pressed(INPUT_MAP["Right"]):
-		move_direction.x = 1
+		if not Input.get_connected_joypads().empty() and use_joypad:
+			#Pranoid mathing 
+			move_direction.x = abs(Input.get_joy_axis(Input.get_connected_joypads().front(), JOY_AXIS_0))
+		else:
+			move_direction.x = 1
 		$"BodyPivot/Body".flip_h = false
 		
 	if move_direction != Vector2():

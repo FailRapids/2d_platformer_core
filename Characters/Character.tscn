@@ -268,11 +268,19 @@ STRENGTH = 5
 
 [node name="Run" type="Node" parent="States" index="6"]
 
-[node name="RunTimer" type="Timer" parent="States/Run" index="0"]
+[node name="Duration" type="Timer" parent="States/Run" index="0"]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Cooldown" type="Timer" parent="States/Run" index="1"]
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
+[connection signal="timeout" from="States/Run/Duration" to="." method="_on_timer_timeout"]

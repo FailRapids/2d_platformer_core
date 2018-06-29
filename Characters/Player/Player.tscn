@@ -70,7 +70,7 @@ script = ExtResource( 6 )
 script = ExtResource( 7 )
 _sections_unfolded = [ "script" ]
 STRENGTH = 1
-MAX_SPEED = 65
+MAX_SPEED = 70
 ACCELRATION = 80
 
 [node name="Jump" parent="States" index="2"]
@@ -93,9 +93,16 @@ stagger_knockback = 90.0
 [node name="Run" parent="States" index="6"]
 script = ExtResource( 11 )
 STRENGTH = 5
-MAX_SPEED = 200
+MAX_SPEED = 150
 ACCELRATION = 100
 DECCELRATION = 80
-max_run_time = 10
+duration = 10
+cooldown = 3
 animation_speed = 1.5
+
+[node name="Duration" parent="States/Run" index="0"]
+one_shot = true
+
+[node name="Cooldown" parent="States/Run" index="1"]
+one_shot = true
 
