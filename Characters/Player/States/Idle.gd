@@ -1,20 +1,13 @@
-extends "res://Characters/Player/States/_State.gd"
+extends "res://Characters/States/Idle.gd"
 
-
-func enter(prev_state):
-	_AnimationPlayer.play("Idle")
+func update(dt):
+	.update(dt)
 	
-func update(delta):
-	if _Player.move_direction != Vector2():
-		return MOVE
-
-func exit():
-	_AnimationPlayer.stop()
-	
-
+	if _Character.move_direction.x != 0:
+		return WALK
+		
 func handle_input(event):
 	if Input.is_action_just_pressed("Jump"):
 		return JUMP
-	if Input.is_action_just_pressed("Attack"):
-		return ATTACK
+
 	

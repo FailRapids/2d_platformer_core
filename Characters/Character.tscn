@@ -1,176 +1,28 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Characters/Character.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Animations/Die.tres" type="Animation" id=2]
-[ext_resource path="res://Characters/Animations/Stagger.tres" type="Animation" id=3]
-[ext_resource path="res://Assets/Enitys.png" type="Texture" id=4]
-[ext_resource path="res://Characters/States/Idle.gd" type="Script" id=5]
-[ext_resource path="res://Characters/States/Move.gd" type="Script" id=6]
-[ext_resource path="res://Characters/States/Jump.gd" type="Script" id=7]
-[ext_resource path="res://Characters/States/Attack.gd" type="Script" id=8]
-[ext_resource path="res://Characters/States/Stagger.gd" type="Script" id=9]
-[ext_resource path="res://Characters/States/Die.gd" type="Script" id=10]
+[ext_resource path="res://Characters/Animations/Idle.tres" type="Animation" id=2]
+[ext_resource path="res://Characters/Animations/Jump.tres" type="Animation" id=3]
+[ext_resource path="res://Characters/Animations/Run.tres" type="Animation" id=4]
+[ext_resource path="res://Characters/Animations/SETUP.tres" type="Animation" id=5]
+[ext_resource path="res://Characters/Animations/Walk.tres" type="Animation" id=6]
+[ext_resource path="res://Characters/States/Idle.gd" type="Script" id=7]
+[ext_resource path="res://Characters/States/Walk.gd" type="Script" id=8]
+[ext_resource path="res://Characters/States/Jump.gd" type="Script" id=9]
 
-[sub_resource type="Animation" id=1]
-
-resource_name = "Idle"
-length = 6.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("BodyPivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 3.1, 4.2, 4.5 ),
-"transitions": PoolRealArray( 1, 1, 4 ),
-"update": 0,
-"values": [ Vector2( 0, 0.2 ), Vector2( 0, -1 ), Vector2( 0, 0.2 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BodyPivot/Body:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 3.1, 4, 4.3, 4.5 ),
-"transitions": PoolRealArray( 0.25, 1, 1, 4 ),
-"update": 0,
-"values": [ 0.0, -8.0, 8.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=2]
-
-resource_name = "SETUP"
-length = 0.01
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("BodyPivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BodyPivot/Body:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("BodyPivot/Body:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("BodyPivot/Body:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyPivot/Body:offset")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -8 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("BodyPivot/Body:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("BodyPivot/Shadow:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-
-resource_name = "Walk"
-length = 0.5
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("BodyPivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 0.412092, 1, 4, 0.405704, 2.50528 ),
-"update": 0,
-"values": [ Vector2( 0, 0.2 ), Vector2( 0, -1 ), Vector2( 0, 0.2 ), Vector2( 0, -1 ), Vector2( 0, 0.2 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BodyPivot/Body:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[node name="Character" type="KinematicBody2D" index="0"]
+[node name="Character" type="KinematicBody2D" groups=[
+"Character",
+]]
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_horizontal_guides_": [ -5.44509, 1.46724, -1.45569, 5.39777 ],
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 root_node = NodePath("..")
@@ -178,11 +30,11 @@ autoplay = "SETUP"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/Die = ExtResource( 2 )
-anims/Idle = SubResource( 1 )
-anims/SETUP = SubResource( 2 )
-anims/Stagger = ExtResource( 3 )
-anims/Walk = SubResource( 3 )
+anims/Idle = ExtResource( 2 )
+anims/Jump = ExtResource( 3 )
+anims/Run = ExtResource( 4 )
+anims/SETUP = ExtResource( 5 )
+anims/Walk = ExtResource( 6 )
 blend_times = [  ]
 
 [node name="Tween" type="Tween" parent="." index="1"]
@@ -194,28 +46,51 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="2"]
+visible = false
+z_index = 1
 build_mode = 0
-polygon = PoolVector2Array( 16, 0, -16, 0, -16, -16, 16, -16 )
+polygon = PoolVector2Array( 4, 1, 4, -3, -4, -3, -4, 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="BodyPivot" type="Position2D" parent="." index="3"]
-scale = Vector2( 3, 3 )
-_sections_unfolded = [ "Transform" ]
+[node name="Normal" type="RayCast2D" parent="." index="3"]
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 1 )
+collision_mask = 1
 
-[node name="Body" type="Sprite" parent="BodyPivot" index="0"]
-position = Vector2( 0, 0.2 )
-texture = ExtResource( 4 )
-offset = Vector2( 0, -8 )
-region_enabled = true
-region_rect = Rect2( 64, 128, 16, 16 )
-_sections_unfolded = [ "Animation", "Offset", "Region" ]
+[node name="BodyPivot" type="Position2D" parent="." index="4"]
+position = Vector2( 0, -3 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
-[node name="Shadow" type="Polygon2D" parent="BodyPivot" index="1"]
-show_behind_parent = true
-polygon = PoolVector2Array( -8.02128, 0.983336, 8.12849, 0.917687, 6.35595, -1.70829, -6.64264, -1.70829 )
+[node name="Pivot" type="Position2D" parent="BodyPivot" index="0"]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="Body" type="Polygon2D" parent="BodyPivot/Pivot" index="0"]
+polygon = PoolVector2Array( -4, 4, -4, -4, 4, -4, 4, 4 )
 uv = PoolVector2Array(  )
 splits = PoolIntArray(  )
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.137255, 0.0941176, 0.866667, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = true
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+skeleton = NodePath("")
+invert_enable = false
+invert_border = 100.0
+bones = [  ]
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Texture", "Transform", "Visibility", "polygon", "splits" ]
+
+[node name="Shadow" type="Polygon2D" parent="BodyPivot/Pivot" index="1"]
+self_modulate = Color( 1, 1, 1, 0.541176 )
+show_behind_parent = true
+scale = Vector2( 2.5, 1 )
+polygon = PoolVector2Array( -1.96512, 5, -1.96512, 3, 2.07233, 3, 2.07233, 5 )
+uv = PoolVector2Array(  )
+splits = PoolIntArray(  )
+color = Color( 0.184314, 0.137255, 0.137255, 0.54902 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
@@ -229,58 +104,39 @@ invert_border = 100.0
 bones = [  ]
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="States" type="Node" parent="." index="4"]
+[node name="States" type="Node" parent="." index="5"]
 
 [node name="Idle" type="Node" parent="States" index="0"]
-script = ExtResource( 5 )
-STRENGTH = 5
-
-[node name="Move" type="Node" parent="States" index="1"]
-script = ExtResource( 6 )
-STRENGTH = 5
-MAX_SPEED = 60
-ACCELRATION = 35
-DECCELRATION = 80
-
-[node name="Jump" type="Node" parent="States" index="2"]
 script = ExtResource( 7 )
-STRENGTH = 5
-MAX_SPEED = 60
-ACCELRATION = 35
-DECCELERATION = 60
-MASS = 15.0
-JUMP_DURATION = 0.5
-MAX_JUMP_HEIGHT = 8
+_sections_unfolded = [ "GRAVITY" ]
+GRAVITY = {
+"Direction": Vector2( 0, 1 ),
+"Force": Vector2( 0, 10 )
+}
 
-[node name="Attack" type="Node" parent="States" index="3"]
+[node name="Walk" type="Node" parent="States" index="1"]
 script = ExtResource( 8 )
-STRENGTH = 5
+GRAVITY = {
+"Direction": Vector2( 0, 1 ),
+"Force": Vector2( 0, 10 )
+}
+min_force = Vector2( 15, 0 )
+max_force = Vector2( 30, 0 )
+step_force = Vector2( 10, 0 )
 
-[node name="Stagger" type="Node" parent="States" index="4"]
+[node name="Run" type="Node" parent="States" index="2"]
+
+[node name="Jump" type="Node" parent="States" index="3"]
 script = ExtResource( 9 )
-STRENGTH = 5
-stagger_knockback = 20
-STAGGER_DURATION = 0.5
-
-[node name="Die" type="Node" parent="States" index="5"]
-script = ExtResource( 10 )
-STRENGTH = 5
-
-[node name="Run" type="Node" parent="States" index="6"]
-
-[node name="Duration" type="Timer" parent="States/Run" index="0"]
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="Cooldown" type="Timer" parent="States/Run" index="1"]
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
+GRAVITY = {
+"Direction": Vector2( 0, 1 ),
+"Force": Vector2( 0, 10 )
+}
+step_force = Vector2( 0, 0 )
+min_force = Vector2( 0, 0 )
+max_force = Vector2( 0, 0 )
+JUMP_DURATION = 0.5
+max_height = 0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_finished"]
-[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
-[connection signal="timeout" from="States/Run/Duration" to="." method="_on_timer_timeout"]

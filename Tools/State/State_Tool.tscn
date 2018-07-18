@@ -2,13 +2,10 @@
 
 [ext_resource path="res://Tools/State/Name.gd" type="Script" id=1]
 
-
-
-[node name="State_Tool" type="Position2D" index="0"]
+[node name="State_Tool" type="Position2D"]
 show_behind_parent = true
-position = Vector2( 56, 65 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Visibility", "Z Index" ]
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="PanelContainer" type="PanelContainer" parent="." index="0"]
 anchor_left = 0.0

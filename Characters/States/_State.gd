@@ -1,51 +1,43 @@
 extends Node
 
-signal status_changed(_dict)
 
-enum STATE_IDS {
-				NULL=0, PREVIOUS_STATE=1,
-				IDLE, MOVE, 
-				RUN,
-				JUMP, ATTACK, 
-				DIE, STAGGER
-				}
+enum{
+	NULL=0,
+	PREVIOUS_STATE=1,
+	CLEAR=2,
+	IDLE,
+	WALK, 
+	RUN,
+	JUMP, 
+	FALL,
+}
+
+export(Dictionary) var GRAVITY = {
+	"Force":Vector2(0, 10),
+	"Direction":Vector2(0,1),
+	}
 
 onready var _Character = $"../.."
-onready var _BodyPivot = $"../../BodyPivot"
-onready var _Collision = $"../../Collision"
 onready var _AnimationPlayer = $"../../AnimationPlayer"
 onready var _Tween = $"../../Tween"
 
-
-export(int,1,10) var STRENGTH = 5
-
+var prev_state
+var time_in_state = 0
 func enter(prev_state):
-	pass
+	self.prev_state = prev_state
 
 func exit():
-	pass
+	self.time_in_state = 0
+	self.prev_state = null
 	
-func update(delta):
-	pass
+func update(dt):
+	self.time_in_state += dt
 
-func physics_update(delta):
+func physics_update(dt):
 	pass
-
-func handle_input(event):
-	pass
-
 
 func _on_animation_finished(name):
 	pass
 
 func _on_tween_finshed(object,key):
-	pass
-
-func _on_health_changed(new_health):
-	if new_health > 0:
-		return STAGGER
-	else:
-		return DIE
-
-func _on_attack_finished():
 	pass
